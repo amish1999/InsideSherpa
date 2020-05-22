@@ -1,0 +1,59 @@
+From 344ce3a93f8d33a07c77260fe012b4fbc40d1163 Mon Sep 17 00:00:00 2001
+From: joe ferrer <joe@insidesherpa.com>
+Date: Fri, 22 May 2020 14:37:48 +0000
+Subject: [PATCH] Create Patch File
+
+---
+ client.py | 21 ++++++++++++---------
+ 1 file changed, 12 insertions(+), 9 deletions(-)
+
+diff --git a/client.py b/client.py
+index 094e768..18aaad1 100644
+--- a/client.py
++++ b/client.py
+@@ -18,7 +18,8 @@
+ #  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ #  DEALINGS IN THE SOFTWARE.
+ 
+-import urllib2
++#import urllib.request as urllib2
++import urllib
+ import time
+ import json
+ import random
+@@ -43,21 +44,23 @@ def getRatio(price_a, price_b):
+ 	""" ------------- Update this function ------------- """
+ 	""" Also create some unit tests for this function in client_test.py """
+ 	if (price_b == 0):
+-    return
+-  return price_a/price_b
++		#When price_b is 0 avoid throwing ZeroDivisionError
++		return
++	return price_a/price_b
++
+ 
+ # Main
+ if __name__ == "__main__":
+ 
+ 	# Query the price once every N seconds.
+-	for _ in xrange(N):
+-		quotes = json.loads(urllib2.urlopen(QUERY.format(random.random())).read())
++	for _ in range(N):
++		quotes = json.loads(urllib.urlopen(QUERY.format(random.random())).read())
+ 
+ 		""" ----------- Update to get the ratio --------------- """
+ 		prices = {}
+-    for quote in quotes:
++		for quote in quotes:
+ 			stock, bid_price, ask_price, price = getDataPoint(quote)
+-			prices[stock] = price 
+-      print "Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price)
++			prices[stock] = price
++			print "Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price)
+ 
+-		print "Ratio %s" % getRatio(prices['ABC'], prices['DEF'])
++		print "Ratio %s" % getRatio(prices['ABC'], prices['DEF'])
+\ No newline at end of file
+-- 
+2.20.1
+
