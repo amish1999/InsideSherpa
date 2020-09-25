@@ -95,20 +95,18 @@ def add_book(book, order, size, _age = 10):
     for o, s, age in book:
         if age > 0:
             yield o, s, age - 1
+            
 
-def clear_order(order, size, book, op = operator.ge, _notional = 0):
-    """ Try to clear a sized order against a book, returning a tuple of
-        (notional, new_book) if successful, and None if not.  _notional is a
-        recursive accumulator and should not be provided by the caller.
-    """
-    (top_order, top_size, age), tail = book[0], book[1:]
-    if op(order, top_order):
-        _notional += min(size, top_size) * top_order
-        sdiff = top_size - size
-        if sdiff > 0:
-            return _notional, list(add_book(tail, top_order, sdiff, age))
-        elif len(tail) > 0:
-            return clear_order(order, -sdiff, tail, op, _notional)
+# Paste below ------------------------------------
+
+
+
+
+
+
+
+#--------------------------------------------------
+
 
 def clear_book(buy = None, sell = None):
     """ Clears all crossed orders from a buy and sell book, returning the new
