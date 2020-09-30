@@ -20,10 +20,7 @@ process = subprocess.Popen(['python', 'server.py'], cwd=os.getcwd(), preexec_fn=
 
 time.sleep(.300)
 
-process2 = subprocess.Popen(['python', 'client.py'], cwd=os.getcwd(), preexec_fn=os.setsid)
-process2.wait()
-os.killpg(os.getpgid(process.pid), signal.SIGTERM)
-
+<!-- paste -->
 
 # FOR BONUS TASK 
 # IF YOU WANT TO DO IT THEN UNCOMMENT THE CODE BELOW
